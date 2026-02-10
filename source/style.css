@@ -33,9 +33,10 @@ header h1 {
 .spline-container {
     position: relative;
     width: 100%;
-    height: 100vh; /* 桌面 */
-    overflow: visible; /* 改为visible */
-    min-height: 600px; /* 最小高度 */
+    height: calc(100vh - 120px); /* CHANGED: Reduced height */
+    overflow: hidden; /* CHANGED: from visible to hidden */
+    min-height: 500px; /* CHANGED: Reduced from 600px */
+    margin-bottom: 20px; /* ADDED: Space before footer */
 }
 
 .spline-container .falaxy {
@@ -54,8 +55,9 @@ header h1 {
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%; /* 桌面 */
-    height: 100%;
+    width: 70%;
+    height: 85% !important; /* CHANGED: Reduced from 100% */
+    max-height: 1000px; /* ADDED: Limits maximum height */
     z-index: 2;
     pointer-events: auto;
     filter: brightness(1.2) contrast(1.2);
@@ -194,17 +196,13 @@ header h1 {
     }
     
     /* 机器人调整 */
-    .spline-container {
-        height: 80vh;
-        min-height: 500px;
-        overflow: visible;
-    }
-    
-    .spline-container .robot {
-        width: 85% !important;
-        height: 70% !important;
-        top: 50%;
-    }
+  .spline-container {
+    height: 60vh; /* was 80vh */
+    min-height: 400px; /* was 500px */
+}
+.spline-container .robot {
+    height: 65% !important; /* was 70% */
+}
     
     /* 方盒改为网格布局，防止重叠 */
     .spline-container {
@@ -330,9 +328,33 @@ header h1 {
 }
 
 /* ====== Footer响应式 ====== */
+
 footer {
     padding: 2rem 1rem;
     text-align: center;
+    background-color: rgba(29, 40, 41, 1); /* CHANGED: Solid dark color */
+    color: white; /* ADDED: White text */
+    position: relative;
+    z-index: 10; /* ADDED: Higher than robot */
+    margin-top: 0;
+}
+/* Add these rules after the footer section */
+footer a,
+footer .btn,
+footer .icon,
+footer .icon span,
+footer .copyright p {
+    color: white !important;
+}
+
+footer .home-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+footer .home-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .home-button {
@@ -378,4 +400,14 @@ footer {
         max-width: 90%;
         font-size: 0.9rem;
     }
+}
+
+/* === FOOTER COLOR FIX === */
+footer {
+    background-color: #1d2829 !important;
+    color: white !important;
+}
+footer a, footer .btn, footer .icon, 
+footer .icon span, footer .copyright p {
+    color: white !important;
 }
