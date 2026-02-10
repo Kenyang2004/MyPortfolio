@@ -1,0 +1,381 @@
+body {
+    background: rgb(29,40,41);
+    background: -moz-linear-gradient(90deg, rgba(29,40,41,1) 0%, rgba(24,30,31,1) 11%, rgba(19,19,20,1) 41%, rgba(19,19,20,1) 58%, rgba(24,30,31,1) 85%, rgba(29,40,41,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(29,40,41,1) 0%, rgba(24,30,31,1) 11%, rgba(19,19,20,1) 41%, rgba(19,19,20,1) 58%, rgba(24,30,31,1) 85%, rgba(29,40,41,1) 100%);
+    background: linear-gradient(90deg, rgba(29,40,41,1) 0%, rgba(24,30,31,1) 11%, rgba(19,19,20,1) 41%, rgba(19,19,20,1) 58%, rgba(24,30,31,1) 85%, rgba(29,40,41,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1d2829",endColorstr="#1d2829",GradientType=1);
+    overflow-x: hidden; /* 防止横向滚动 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 重要！ */
+}
+
+/* ====== 头部响应式 ====== */
+header h1 {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 4rem; /* 桌面 */
+    background-image: linear-gradient(to bottom, rgb(133, 133, 133), rgb(255, 255, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 0 20px; /* 添加内边距 */
+    line-height: 1.2;
+}
+
+/* ====== 机器人容器响应式 ====== */
+.spline-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* 桌面 */
+    overflow: visible; /* 改为visible */
+    min-height: 600px; /* 最小高度 */
+}
+
+.spline-container .falaxy {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.spline-container .robot {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%; /* 桌面 */
+    height: 100%;
+    z-index: 2;
+    pointer-events: auto;
+    filter: brightness(1.2) contrast(1.2);
+}
+
+/* ====== 霓虹灯方盒样式 ====== */
+.neon-box {
+    position: absolute;
+    width: 320px;
+    height: 220px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    background: rgba(20, 20, 30, 0.7);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.box-content {
+    padding: 20px;
+}
+
+.box-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.box-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+/* 方盒位置 */
+.box-about {
+    top: 25%;
+    left: 10%;
+    --neon-color: #ff0080;
+    --neon-glow: rgba(255, 0, 128, 0.7);
+}
+
+.box-projects {
+    top: 25%;
+    right: 10%;
+    --neon-color: #00ffaa;
+    --neon-glow: rgba(0, 255, 170, 0.7);
+}
+
+.box-interests {
+    bottom: 5%;
+    left: 15%;
+    --neon-color: #ffaa00;
+    --neon-glow: rgba(255, 170, 0, 0.7);
+}
+
+.box-contact {
+    bottom: 5%;
+    right: 15%;
+    --neon-color: #8800ff;
+    --neon-glow: rgba(136, 0, 255, 0.7);
+}
+
+/* 悬停效果 */
+.neon-box:hover {
+    transform: translateY(-20px) scale(1.25);
+    border: 2px solid var(--neon-color);
+    box-shadow: 
+        0 0 40px var(--neon-glow),
+        0 0 80px var(--neon-glow),
+        0 0 120px var(--neon-glow),
+        inset 0 0 40px rgba(255, 255, 255, 0.1);
+    animation: neon-box-pulse 1.8s infinite alternate;
+}
+
+@keyframes neon-box-pulse {
+    0% { transform: translateY(-20px) scale(1.2); }
+    100% { transform: translateY(-20px) scale(1.3); }
+}
+
+.neon-box:hover .box-text {
+    color: white;
+    text-shadow: 
+        0 0 15px var(--neon-glow),
+        0 0 30px var(--neon-glow);
+    transform: scale(1.1); /* 从1.5改为1.1，手机不会太大 */
+    transition: all 0.3s ease;
+}
+
+/* ====== 手机响应式修复 ====== */
+
+/* 平板 (768px-1024px) */
+@media (max-width: 1024px) {
+    header h1 {
+        font-size: 3rem;
+    }
+    
+    .spline-container {
+        height: 90vh;
+    }
+    
+    .neon-box {
+        width: 240px;
+        height: 180px;
+    }
+    
+    .box-text {
+        font-size: 1.5rem;
+    }
+    
+    .box-about, .box-projects {
+        top: 20%;
+    }
+    
+    .box-interests, .box-contact {
+        bottom: 10%;
+    }
+}
+
+/* 手机 (480px-768px) - 重要修复！ */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+        margin-top: 1.5rem;
+        padding: 0 15px;
+    }
+    
+    /* 机器人调整 */
+    .spline-container {
+        height: 80vh;
+        min-height: 500px;
+        overflow: visible;
+    }
+    
+    .spline-container .robot {
+        width: 85% !important;
+        height: 70% !important;
+        top: 50%;
+    }
+    
+    /* 方盒改为网格布局，防止重叠 */
+    .spline-container {
+        display: grid;
+        grid-template-areas: 
+            "robot robot"
+            "about projects"
+            "interests contact";
+        grid-template-rows: auto 200px 200px;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .spline-container .robot,
+    .spline-container .falaxy {
+        grid-area: robot;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100% !important;
+        height: 300px !important;
+        margin: 0 auto;
+    }
+    
+    .neon-box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0;
+    }
+    
+    .box-about { grid-area: about; }
+    .box-projects { grid-area: projects; }
+    .box-interests { grid-area: interests; }
+    .box-contact { grid-area: contact; }
+    
+    .box-text {
+        font-size: 1.4rem;
+    }
+    
+    .box-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    /* 悬停效果调整 */
+    .neon-box:hover {
+        transform: translateY(-10px) scale(1.15);
+    }
+}
+
+/* 小手机 (<480px) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+        margin-top: 1rem;
+    }
+    
+    .spline-container {
+        height: auto;
+        min-height: 100vh;
+        grid-template-rows: auto 150px 150px;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .spline-container .robot,
+    .spline-container .falaxy {
+        height: 250px !important;
+    }
+    
+    .neon-box {
+        height: 140px;
+    }
+    
+    .box-text {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .box-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    /* 修复文字缩放 */
+    .neon-box:hover .box-text {
+        transform: scale(1.05);
+    }
+}
+
+/* 超小手机 (<360px) */
+@media (max-width: 360px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .spline-container {
+        gap: 10px;
+        padding: 10px;
+        grid-template-rows: auto 130px 130px;
+    }
+    
+    .spline-container .robot,
+    .spline-container .falaxy {
+        height: 200px !important;
+    }
+    
+    .neon-box {
+        height: 120px;
+    }
+    
+    .box-text {
+        font-size: 1.1rem;
+    }
+    
+    .box-subtitle {
+        font-size: 0.75rem;
+    }
+}
+
+/* ====== Footer响应式 ====== */
+footer {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 12px 30px;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.8rem auto;
+    padding: 12px 20px;
+    max-width: 300px;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 1.5rem 10px;
+    }
+    
+    .icon {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .icon i {
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .icon {
+        max-width: 90%;
+        font-size: 0.9rem;
+    }
+}
